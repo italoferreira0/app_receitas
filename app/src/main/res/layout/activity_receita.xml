@@ -75,28 +75,17 @@
 
                 android:layout_gravity="center_horizontal"
                 />
-            <Button
 
+            <Button
                 android:backgroundTint="@color/laranja_escuro"
-                android:id="@+id/btnDeletar"
+                android:id="@+id/btnDelete"
                 android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/excluir_receita"
+                android:text="@string/delete"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
                 />
-            <Button
-                android:layout_marginStart="5dp"
-                android:backgroundTint="@color/laranja_escuro"
-                android:id="@+id/btnEditar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/editar_receita"
-                android:layout_marginTop="16dp"
-                android:layout_gravity="center_horizontal"
-                />
-
 
         </LinearLayout>
 

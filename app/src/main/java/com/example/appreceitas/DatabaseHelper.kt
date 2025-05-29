@@ -65,6 +65,23 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "ReceitasDB",
         return lista
     }
 
+    fun deleteReceitas(idReceita: Int): Boolean {
+        val db = writableDatabase
+
+        try {
+            db.delete("receitas", "id = ?", arrayOf(idReceita.toString()))
+            db.delete("ingredientes", "id_receita = ?", arrayOf(idReceita.toString()))
+            return true
+        }catch (
+
+            e: Exception
+        ){
+            println("Erro ao excluir receita: ${e.message}")
+            return false
+        }
+
+    }
+
     fun listarIngredientes(idReceita: Int): List<String> {
         val lista = mutableListOf<String>()
         val db = readableDatabase

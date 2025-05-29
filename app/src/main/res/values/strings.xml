@@ -11,4 +11,5 @@
     <string name="receita">Receita</string>
     <string name="excluir_receita">Excluir Receita</string>
     <string name="editar_receita">Editar Receita</string>
+    <string name="delete">Delete</string>
 </resources>
