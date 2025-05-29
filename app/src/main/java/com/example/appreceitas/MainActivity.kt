@@ -5,11 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.appreceitas.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,9 +15,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
     private var imagemSelecionada: Uri? = null
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+    // Launcher para pegar imagem da galeria
+    private val launcherImagem = registerForActivityResult(ActivityResultContracts.GetContent()) {
         imagemSelecionada = it
         binding.imagePreview.setImageURI(it)
+    }
+
+    // Launcher para abrir a ReceitaActivity e detectar retorno
+    private val launcherReceita = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val deleted = result.data?.getBooleanExtra("deleted", false) ?: false
+            if (deleted) {
+                carregarReceitas()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         db = DatabaseHelper(this)
 
         binding.btnEscolherImagem.setOnClickListener {
-            launcher.launch("image/*")
+            launcherImagem.launch("image/*")
         }
 
         binding.btnSalvar.setOnClickListener {
@@ -49,11 +57,10 @@ class MainActivity : AppCompatActivity() {
             val receita = db.listarReceitas()[position]
             val intent = Intent(this, ReceitaActivity::class.java)
             intent.putExtra("idReceita", receita.id)
-            startActivity(intent)
+            launcherReceita.launch(intent) // <- abre ReceitaActivity esperando resultado
         }
 
         carregarReceitas()
-
     }
 
     private fun carregarReceitas() {
@@ -61,5 +68,4 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, receitas.map { it.titulo })
         binding.listReceitas.adapter = adapter
     }
-
 }
