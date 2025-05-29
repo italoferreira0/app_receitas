@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">App Receitas</string>
+    <string name="ingredientes">Ingredientes (separados por vírgula)</string>
+    <string name="escolher_imagem">Escolher Imagem</string>
+    <string name="salvar_receita">Salvar Receita</string>
+    <string name="titulo_da_receita">Título da Receita</string>
+    <string name="lista_de_receitas">Lista de Receitas</string>
+    <string name="lista_de_recitas">Lista de Recitas</string>
+    <string name="receitas">Receitas</string>
+    <string name="voltar">Voltar</string>
+    <string name="receita">Receita</string>
+    <string name="excluir_receita">Excluir Receita</string>
+    <string name="editar_receita">Editar Receita</string>
+</resources>
